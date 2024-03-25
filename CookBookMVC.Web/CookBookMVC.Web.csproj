@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CookBook.Infrastructure\CookBook.Infrastructure.csproj" />
+    <ProjectReference Include="..\CookBook.Infrastructure\CookBookMVC.Infrastructure.csproj" />
     <ProjectReference Include="..\CookBookMVC.Application\CookBookMVC.Application.csproj" />
   </ItemGroup>
 

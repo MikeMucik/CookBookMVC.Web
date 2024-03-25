@@ -1,6 +1,7 @@
+using CookBook.Infrastructure;
 using CookBookMVC.Application.Interfaces;
 using CookBookMVC.Application.Services;
-using CookBookMVC.Web.Data;
+//using CookBookMVC.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<Context>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IRecipeServis, RecipeServis>();
@@ -41,10 +42,10 @@ app.UseAuthorization();
 
 
 
-//app.MapControllerRoute(
-//    name: "blog",
-//    pattern: "blog/{*article}",
-//    defaults: new { controller = "Blog", action = "Action" });
+app.MapControllerRoute(
+    name: "blog",
+    pattern: "blog/{*article}",
+    defaults: new { controller = "Blog", action = "Action" });
 
 app.MapControllerRoute(
     name: "default",

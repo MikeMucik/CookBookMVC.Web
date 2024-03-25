@@ -15,13 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{142CA669-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D08CB423-B425-48C0-812B-222CD140E0F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBookMVC.Application", "CookBookMVC.Application\CookBookMVC.Application.csproj", "{24D6A880-C25D-4F52-82D9-28E911DBAB0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBookMVC.Application", "CookBookMVC.Application\CookBookMVC.Application.csproj", "{24D6A880-C25D-4F52-82D9-28E911DBAB0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBookMVC.Domain", "CookBookMVC.Domain\CookBookMVC.Domain.csproj", "{BC001CB0-16D2-4AEC-8FF6-717BD043D39A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBookMVC.Domain", "CookBookMVC.Domain\CookBookMVC.Domain.csproj", "{BC001CB0-16D2-4AEC-8FF6-717BD043D39A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.Infrastructure", "CookBook.Infrastructure\CookBook.Infrastructure.csproj", "{F34E8A37-1132-4BDC-92F1-F16B3428CD38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBookMVC.Infrastructure", "CookBook.Infrastructure\CookBookMVC.Infrastructure.csproj", "{F34E8A37-1132-4BDC-92F1-F16B3428CD38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.Test", "CookBook.Test\CookBook.Test.csproj", "{E7A7DF64-2343-48E1-8DBF-43754AB39EA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBookMVC.Test", "CookBook.Test\CookBookMVC.Test.csproj", "{E7A7DF64-2343-48E1-8DBF-43754AB39EA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
