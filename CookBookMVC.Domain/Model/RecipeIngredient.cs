@@ -13,6 +13,6 @@ namespace CookBookMVC.Domain.Model
 		public virtual Recipe Recipe { get; set; }
 		public int IngredientId { get; set; }
 		public virtual Ingredient Ingredient { get; set; }
-		public int Quantity { get; set; }
+		//public int Quantity { get; set; }//tu usuwam i wstawiam no Ingredient
 	}
 }

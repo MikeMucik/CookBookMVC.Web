@@ -45,9 +45,9 @@ namespace CookBook.Infrastructure
 				.WithMany(s => s.RecipeIngredients)
 				.HasForeignKey(re => re.IngredientId);
 
-			builder.Entity<RecipeIngredient>()
-				.Property(rq => rq.Quantity)
-				.HasField("quantity");
+			//builder.Entity<RecipeIngredient>()
+			//	.Property(rq => rq.Quantity)
+			//	.HasField("quantity"); //to zakomentowane bo przeniosłem Quantity do Ingredient a było w RecipeIngredient
 		}
 
 	}
