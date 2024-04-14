@@ -17,7 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<Context>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<IRecipeServis, RecipeServis>();
+builder.Services.AddTransient<IRecipeService, RecipeService>();
 
 var app = builder.Build();
 

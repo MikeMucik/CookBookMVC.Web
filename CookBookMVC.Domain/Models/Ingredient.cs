@@ -12,6 +12,6 @@ namespace CookBookMVC.Domain.Model
 		public string Name { get; set; }
 		public string Unit { get; set; }
 		public int Quantity { get; set; }
-		public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } 
+		public ICollection<RecipeIngredient> RecipeIngredients { get; set; }// virtual
 	}
 }

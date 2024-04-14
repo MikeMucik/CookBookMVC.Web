@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using CookBookMVC.Application.Interfaces;
+using CookBookMVC.Domain.Model;
 using CookBookMVC.Application.Services;
 using CookBookMVC.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace CookBookMVC.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IRecipeServis _recipeServis;
+        private readonly IRecipeService _recipeServis;
 
-        public HomeController(ILogger<HomeController> logger, IRecipeServis recipeServis)
+        public HomeController(ILogger<HomeController> logger, IRecipeService recipeServis)
         {
             _logger = logger;
             _recipeServis = recipeServis;
@@ -85,7 +86,7 @@ namespace CookBookMVC.Web.Controllers
         public IActionResult ViewByCategoryPartial(string category)
         {
 			List<Recipe> recipes = new List<Recipe>();
-			recipes.Add(new Recipe() { Id = 1, Name = "fried eggs", Category = "Breakfast" });
+			recipes.Add(new Recipe() { Id = 1, Name = "fried eggs", CategoryId = 1 });//!!!!
 			recipes.Add(new Recipe() { Id = 2, Name = "sandwich", Category = "Lunch" });
 			recipes.Add(new Recipe() { Id = 3, Name = "milksoup", Category = "Breakfast" });
 			if (!string.IsNullOrEmpty(category))

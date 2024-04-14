@@ -18,5 +18,7 @@ namespace CookBookMVC.Domain.Interface
 		Recipe GetRecipeById(int id);
 
 		IQueryable<Category> GetAllCategories();
+
+		IQueryable<Ingredient> GetAllIngredients();
 	}
 }

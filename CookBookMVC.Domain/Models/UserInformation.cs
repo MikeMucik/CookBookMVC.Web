@@ -12,7 +12,7 @@ namespace CookBookMVC.Domain.Model
 		public string UserName { get; set; }
 		public string Password { get; set; }
 		public string Email { get; set; }
-		public int UserRef {  get; set; }
+		public int UserRef {  get; set; } // dlaczego używamy UserRef a nie UserId ?
 		public User User { get; set; }
 	}
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CookBookMVC.Application.Interfaces
 {
-    public interface IRecipeServis
-    {
-        List<int> GetAllRecipes();
-    }
+	public interface IUserService
+	{
+		List<int> GetUsers();
+	}
 }

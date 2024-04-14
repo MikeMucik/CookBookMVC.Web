@@ -44,6 +44,11 @@ namespace CookBook.Infrastructure.Repositories
         {
             var categories = _context.Categories;
             return categories;
-        }
-    }
+        }      
+		public IQueryable<Ingredient> GetAllIngredients()
+		{
+			var ingredients = _context.Ingredients;
+			return ingredients; 
+		}
+	}
 }
