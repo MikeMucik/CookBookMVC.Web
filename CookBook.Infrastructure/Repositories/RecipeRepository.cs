@@ -15,31 +15,44 @@ namespace CookBook.Infrastructure.Repositories
         {
             _context = context;
         }
-        public void DeleteRecipe(int recipeId)
-        {
-            var recipe = _context.Recipes.Find(recipeId);
-            if (recipe != null)
-            {
-                _context.Recipes.Remove(recipe);
-                _context.SaveChanges();
-            }
-        }
+
         public int AddRecipe(Recipe recipe)
         {
             _context.Recipes.Add(recipe);
             _context.SaveChanges();
             return recipe.Id;
         }
+
+        public void DeleteRecipe(int recipeId)
+		{
+			var recipe = _context.Recipes.Find(recipeId);
+			if (recipe != null)
+			{
+				_context.Recipes.Remove(recipe);
+				_context.SaveChanges();
+			}
+		}
+
+        public int UpdateRecipe(Recipe recipe)
+        {
+            _context.Recipes.Update(recipe);
+            _context.SaveChanges();
+            return recipe.Id;
+        }
+        
+
         public IQueryable<Recipe> GetRecipesByCategoryId(int categoryId)
         {
             var recipes = _context.Recipes.Where(r => r.CategoryId == categoryId);
             return recipes;
         }
-        public Recipe GetRecipeById (int id)
+
+        public Recipe GetRecipeById (int itemId)
         {
-            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == id);
+            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == itemId);
             return recipe;
         }
+
         public IQueryable<Category> GetAllCategories()
         {
             var categories = _context.Categories;

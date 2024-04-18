@@ -13,10 +13,13 @@ namespace CookBookMVC.Domain.Interface
 
 		int AddRecipe(Recipe recipe);
 
+		int UpdateRecipe(Recipe recipe);
+
 		IQueryable<Recipe> GetRecipesByCategoryId(int categoryId);
 
 		Recipe GetRecipeById(int id);
 
 		IQueryable<Category> GetAllCategories();
+		
 	}
 }
