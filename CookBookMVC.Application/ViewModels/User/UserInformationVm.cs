@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookBookMVC.Domain.Model
+namespace CookBookMVC.Application.ViewModels.User
 {
-	public class User
+	public class UserInformationVm
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public virtual UserInformation UserInformation { get; set; }
 		public string Description { get; set; }
-		public bool IsActive { get; set; }
+		public string Email { get; set; }
+		public string UserName { get; set; }
 	}
 }

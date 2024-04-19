@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CookBookMVC.Domain\CookBookMVC.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Recipe\" />
+  </ItemGroup>
+
 </Project>
