@@ -8,7 +8,7 @@ namespace CookBookMVC.Web.Controllers
 	{
 		public IActionResult Index()
 		{
-			//utworzyć wisok dla tej akcji
+			//utworzyć widok dla tej akcji
 			//tabela z użytkowanikami
 			//filtrowanie użytkowników
 			//przygotować dane
@@ -33,22 +33,22 @@ namespace CookBookMVC.Web.Controllers
 			return View();
 		}
 
-		[HttpGet]
-		public IActionResult AddNewUserInformation(int userId)
-		{
-			return View();
-		}
+		//[HttpGet]
+		//public IActionResult AddNewUserInformation(int userId)
+		//{
+		//	return View();
+		//}
 
-		[HttpPost]
-		public IActionResult AddNewUserInformation(UserInformationModel model)
-		{
-			return View(model);
-		}
+		//[HttpPost]
+		//public IActionResult AddNewUserInformation(UserInformationModel model)
+		//{
+		//	return View(model);
+		//}
 
-		public IActionResult ViewUser(int userId)
-		{
-			var userModel = userService.GetUser(userId);
-			return View(userModel);
-		}
+		//public IActionResult ViewUser(int userId)
+		//{
+		//	var userModel = userService.GetUser(userId);
+		//	return View(userModel);
+		//}
 	}
 }

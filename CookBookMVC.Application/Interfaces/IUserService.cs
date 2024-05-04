@@ -9,9 +9,15 @@ namespace CookBookMVC.Application.Interfaces
 {
 	public interface IUserService
 	{
-		ListUserForListVm GetAllUsersForList();
 		int AddUser(NewUserVm user);
+
+		void DeleteUser(int userId);
+
+		ListUserForListVm GetAllUsersForList();
+		
 		UserInformationVm GetUser(int userId);
+
+
 
 
 		//List<int> GetUsers();

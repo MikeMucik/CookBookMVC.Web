@@ -33,6 +33,11 @@ namespace CookBookMVC.Infrastructure.Repositories
 			}
 		}
 
+		public IQueryable<User> GetAllUsersActive()
+		{
+			return _context.Users.Where(u => u.IsActive);
+		}
+
 		public User GetUser(int userId)
 		{
 			var user = _context.Users.FirstOrDefault(u => u.Id == userId);

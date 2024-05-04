@@ -11,5 +11,6 @@ namespace CookBookMVC.Domain.Model
 		public int Id { get; set; }
 		public int Amount { get; set; }
 		public int Unit { get; set; }
+		public Recipe Recipes { get; set; }
 	}
 }

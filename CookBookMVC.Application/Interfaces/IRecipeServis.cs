@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CookBookMVC.Application.ViewModels.Recipe;
 
 namespace CookBookMVC.Application.Interfaces
 {
     public interface IRecipeServis
     {
-        List<int> GetAllRecipes();
-    }
+        // List<int> GetAllRecipes();
+
+        int AddRecipe(NewRecipeVm recipe);
+
+        void DeleteRecipe(int recipeId);
+        ListRecipeForListVm GetAllRecipesForList();
+        RecipeDetailsVm GetRecipeDetails(int recipeId);
+	}
+    
 }

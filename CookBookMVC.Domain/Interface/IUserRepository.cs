@@ -9,10 +9,14 @@ namespace CookBookMVC.Domain.Interface
 {
 	public interface IUserRepository
 	{
-		IQueryable<User> GetAllUsersActive();
-		void DeleteUser(int userId);
 		int AddUser(User user);
-		int UpdateUser(User user);
+
+		void DeleteUser(int userId);
+
+		IQueryable<User> GetAllUsersActive();
+
 		User GetUser(int userId);
+
+		int UpdateUser(User user);
 	}
 }

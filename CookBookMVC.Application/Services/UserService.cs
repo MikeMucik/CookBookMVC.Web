@@ -14,6 +14,12 @@ namespace CookBookMVC.Application.Services
 		private readonly IUserRepository _userRepo;
 		public int AddUser(NewUserVm user)
 		{
+
+			throw new NotImplementedException();
+		}
+
+		public void DeleteUser(int userId)
+		{
 			throw new NotImplementedException();
 		}
 
@@ -22,28 +28,32 @@ namespace CookBookMVC.Application.Services
 			var users = _userRepo.GetAllUsersActive();
 			ListUserForListVm result = new ListUserForListVm();
 			result.Users = new List<UserForListVm>();
-            foreach (var user in users)
-            {
-                var userVm = new UserForListVm();
+			foreach (var user in users)
+			{
+				var userVm = new UserForListVm()
 				{
-					Id = user.Id;
-					Name = user.Name;
+					Id = user.Id,
+					Name = user.UserName
 				};
 				result.Users.Add(userVm);
-            }
-			result.Count= result.Users.Count;
+			}
+			result.Count = result.Users.Count;
 			return result;
-        }
+		}
 
 		public UserInformationVm GetUser(int userId)
 		{
-			throw new NotImplementedException();
-		}
+			var user = _userRepo.GetUser(userId);
+			var userVm = new UserInformationVm();
+			userVm.Id = user.Id;
 
-		//public List<int> GetUsers()
-		//{
-		//	var users = new List<int>();
-		//	return users;
-		//}
+			userVm.Description = user.Description;
+			var userInfo = user.UserInformation;
+			userVm.Name = userInfo.FirstName + " " + userInfo.LastName;
+			userVm.Email = userInfo.Email;
+			userVm.UserName = user.UserName;
+			return userVm;
+
+		}
 	}
 }
