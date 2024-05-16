@@ -47,7 +47,8 @@ namespace CookBook.Infrastructure
 
 			//builder.Entity<RecipeIngredient>()
 			//	.Property(rq => rq.Quantity)
-			//	.HasField("quantity"); //to zakomentowane bo przeniosłem Quantity do Ingredient a było w RecipeIngredient
+			//	.HasField("quantity"); 
+		
 		}
 
 	}

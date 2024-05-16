@@ -1,4 +1,5 @@
-﻿using CookBookMVC.Application.Services;
+﻿using CookBookMVC.Application.Interfaces;
+using CookBookMVC.Application.Services;
 using CookBookMVC.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,13 @@ namespace CookBookMVC.Web.Controllers
 {
 	public class UserController : Controller
 	{
-		public IActionResult Index()
+		private readonly IUserService _userService;
+        public UserController(IUserService userService)
+        {
+			_userService = userService;
+            
+        }
+        public IActionResult Index()
 		{
 			//utworzyć widok dla tej akcji
 			//tabela z użytkowanikami
@@ -16,7 +23,7 @@ namespace CookBookMVC.Web.Controllers
 			//serwis musi przygotować 
 			//serwis musi zwrócić dane w odpowiednim formacie
 
-			var model = userService.GetAllUsersForList();
+			var model = _userService.GetAllUsersForList();
 			return View(model);
 		}
 
@@ -26,18 +33,18 @@ namespace CookBookMVC.Web.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public IActionResult AddUser(UserModel model)
-		{
-			var id = userService.AddUser(model);
-			return View();
-		}
-
-		//[HttpGet]
-		//public IActionResult AddNewUserInformation(int userId)
+		//[HttpPost]
+		//public IActionResult AddUser(UserModel model)
 		//{
+		//	var id = _userService.AddUser(model);
 		//	return View();
 		//}
+
+		[HttpGet]
+		public IActionResult AddNewUserInformation(int userId)
+		{
+			return View();
+		}
 
 		//[HttpPost]
 		//public IActionResult AddNewUserInformation(UserInformationModel model)
@@ -45,10 +52,10 @@ namespace CookBookMVC.Web.Controllers
 		//	return View(model);
 		//}
 
-		//public IActionResult ViewUser(int userId)
-		//{
-		//	var userModel = userService.GetUser(userId);
-		//	return View(userModel);
-		//}
+		public IActionResult ViewUser(int userId)
+		{
+			var userModel = _userService.GetUser(userId);
+			return View(userModel);
+		}
 	}
 }

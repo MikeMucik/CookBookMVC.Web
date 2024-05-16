@@ -36,7 +36,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.Difficulty", b =>
@@ -53,7 +53,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulty");
+                    b.ToTable("Difficulty", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.Ingredient", b =>
@@ -77,7 +77,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.Recipe", b =>
@@ -113,7 +113,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasIndex("TimeId");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.RecipeIngredient", b =>
@@ -131,7 +131,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasIndex("IngredientId");
 
-                    b.ToTable("RecipeIngredient");
+                    b.ToTable("RecipeIngredient", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.Time", b =>
@@ -150,7 +150,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Times");
+                    b.ToTable("Times", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.User", b =>
@@ -171,7 +171,7 @@ namespace CookBookMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.UserInformation", b =>
@@ -202,7 +202,7 @@ namespace CookBookMVC.Infrastructure.Migrations
                     b.HasIndex("UserRef")
                         .IsUnique();
 
-                    b.ToTable("UsersInformation");
+                    b.ToTable("UsersInformation", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

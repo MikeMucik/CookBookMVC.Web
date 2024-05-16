@@ -1,7 +1,8 @@
 using CookBook.Infrastructure;
 using CookBookMVC.Application.Interfaces;
 using CookBookMVC.Application.Services;
-//using CookBookMVC.Web.Data;
+using CookBookMVC.Application;//
+using CookBookMVC.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<Context>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<IRecipeServis, RecipeServis>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
+//builder.Services.AddTransient<IUserService, UserService>();
+//builder.Services.AddTransient<IRecipeServis, RecipeServis>();
+
+//builder.Services.AddTransient<IRecipeServis, RecipeServis>();
 
 var app = builder.Build();
 
@@ -42,10 +48,10 @@ app.UseAuthorization();
 
 
 
-app.MapControllerRoute(
-    name: "blog",
-    pattern: "blog/{*article}",
-    defaults: new { controller = "Blog", action = "Action" });
+//app.MapControllerRoute(
+//    name: "blog",
+//    pattern: "blog/{*article}",
+//    defaults: new { controller = "Blog", action = "Action" });
 
 app.MapControllerRoute(
     name: "default",

@@ -7,14 +7,15 @@ using CookBookMVC.Application.ViewModels.Recipe;
 
 namespace CookBookMVC.Application.Interfaces
 {
-    public interface IRecipeServis
+    public interface IRecipeService
     {
-        // List<int> GetAllRecipes();
-
+        
         int AddRecipe(NewRecipeVm recipe);
 
         void DeleteRecipe(int recipeId);
+
         ListRecipeForListVm GetAllRecipesForList();
+
         RecipeDetailsVm GetRecipeDetails(int recipeId);
 	}
     

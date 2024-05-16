@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookBookMVC.Domain.Model
+namespace CookBookMVC.Application.ViewModels.Recipe
 {
-	public class Time
+	public class IngredientForListVm
 	{
 		public int Id { get; set; }
-		public int Amount { get; set; }
+		public string Name { get; set; }
+		public int Quantity { get; set; }//??
 		public string Unit { get; set; }
-		public virtual ICollection <Recipe> Recipes { get; set; }
 	}
 }

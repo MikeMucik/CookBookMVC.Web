@@ -47,9 +47,9 @@ namespace CookBook.Infrastructure.Repositories
             return recipes;
         }
 
-        public Recipe GetRecipeById (int itemId)
+        public Recipe GetRecipeById (int recipeId)
         {
-            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == itemId);
+            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == recipeId);
             return recipe;
         }
 
