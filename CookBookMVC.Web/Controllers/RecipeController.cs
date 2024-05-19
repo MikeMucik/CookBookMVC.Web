@@ -35,11 +35,13 @@ namespace CookBookMVC.Web.Controllers
 		//	var id = recipeServis.AddRecipe(model);
 		//	return View();
 		//}
-		//[HttpGet]
-		//public IActionResult ViewRecipeDetails(int  id)
-		//{
-		//	var recipeModel = recipeService.GetRecipeDetails(id);
-		//	return View();
-		//}
+		[HttpGet]
+		public IActionResult ViewRecipeDetails(int id)
+		{
+			var recipeModel = _recipeService.GetRecipeDetails(id);
+
+			return View(recipeModel);
+		}
+
 	}
 }

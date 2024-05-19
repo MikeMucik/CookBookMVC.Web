@@ -1,0 +1,22 @@
+﻿@model List<CookBookMVC.Application.ViewModels.Recipe.IngredientForListVm>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Ilość</th>
+            <th>Jednostka</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingredient in Model)
+        {
+            <tr>
+                <td>@ingredient.Name</td>
+                <td>@ingredient.Quantity</td>
+                <td>@ingredient.Unit</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

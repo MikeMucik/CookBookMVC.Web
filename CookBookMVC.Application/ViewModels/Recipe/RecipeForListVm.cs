@@ -16,7 +16,8 @@ namespace CookBookMVC.Application.ViewModels.Recipe
 
 		public void Mapping(Profile profile)
 		{
-			profile.CreateMap<CookBookMVC.Domain.Model.Recipe, RecipeForListVm>();
+			profile.CreateMap<CookBookMVC.Domain.Model.Recipe, RecipeForListVm>()
+				.ForMember(q => q.Category, opt => opt.MapFrom(w => w.Category.Name));
 		}
 	}
 }
