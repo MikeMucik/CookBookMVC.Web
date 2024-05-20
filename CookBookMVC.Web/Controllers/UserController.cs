@@ -55,6 +55,10 @@ namespace CookBookMVC.Web.Controllers
 		public IActionResult ViewUser(int userId)
 		{
 			var userModel = _userService.GetUser(userId);
+			if (userModel == null)
+			{
+				return View("Error");
+			}
 			return View(userModel);
 		}
 	}

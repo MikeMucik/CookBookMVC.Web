@@ -5,6 +5,7 @@ using CookBookMVC.Application;//
 using CookBookMVC.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CookBookMVC.Application.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile)); //czy to naprawi b³êdy z mapowaniem
 //builder.Services.AddTransient<IUserService, UserService>();
 //builder.Services.AddTransient<IRecipeServis, RecipeServis>();
 

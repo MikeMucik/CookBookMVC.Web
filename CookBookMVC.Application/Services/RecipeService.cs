@@ -61,9 +61,13 @@ namespace CookBookMVC.Application.Services
 		public RecipeDetailsVm GetRecipeDetails(int recipeId)
 		{
 			var recipe = _recipeRepo.GetRecipeById(recipeId);
+			if (recipe == null)
+			{
+				throw new Exception("Recipe not found");
+			}
 			var recipeVm = _mapper.Map<RecipeDetailsVm>(recipe);
 			recipeVm.Ingredients = new List<IngredientForListVm>();
-			foreach (var ingredient in recipe.RecipeIngredients)
+			foreach (var ingredient in recipe.RecipeIngredient)
 			{
 				var ingVm = new IngredientForListVm
 				{

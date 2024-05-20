@@ -1,11 +1,57 @@
 ﻿@model CookBookMVC.Application.ViewModels.Recipe.RecipeDetailsVm
 
+@{
+	ViewData["Title"] = "ViewRecipeDetails";
+}
+
+<h1>ViewRecipeDetails</h1>
+
 <div>
-    <h2>@Model.Name</h2>
-    <p>Kategoria: @Model.CategoryName</p>
-    <p>Trudność: @Model.DifficultyName</p>
-    <p>Czas przygotowania: @Model.TimeName</p>
-    <p>Opis: @Model.Description</p>
-    <h3>Składniki (@Model.AmountOfIngredients):</h3>
-    @Html.Partial("_IngredientList", Model.Ingredients)
+	<h4>ViewRecipeDetailsVm</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Id)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Id)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.CategoryName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.DifficultyName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.DifficultyName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.TimeName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.TimeName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Description)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Description)
+		</dd>
+	
+	<h3>Ingredients (@Model.AmountOfIngredients):</h3>
+			@Html.Partial("_IngredientList", Model.Ingredients)
+	</dl>
+</div>
+<div>
+	@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+	<a asp-action="Index">Back to List</a>
 </div>

@@ -9,19 +9,19 @@ using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.ViewModels.User
 {
-	public class UserInformationVm : IMapFrom<UserInformation>
+	public class UserInformationVm : IMapFrom<CookBookMVC.Domain.Model.User>
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public string Description { get; set; }
-		public string Email { get; set; }
-		public string UserName { get; set; }
+        public string UserName { get; set; }
+        public string Description { get; set; }
+		public string Email { get; set; }		
 		public void Mapping(Profile profile)
 		{
-			profile.CreateMap<UserInformation, UserInformationVm>()
-				.ForMember(q => q.Name, opt => opt.MapFrom(w => w.FirstName + " " + w.LastName))
-				.ForMember(q=>q.Id, opt=>opt.MapFrom(w=>w.User.Id))
-				.ForMember(q => q.UserName, opt => opt.MapFrom(w => w.User.UserName));
+			profile.CreateMap<CookBookMVC.Domain.Model.User, UserInformationVm>()
+				.ForMember(q => q.Name, opt => opt.MapFrom(w => w.UserInformation.FirstName + " " + w.UserInformation.LastName))
+				.ForMember(q => q.Email, opt => opt.MapFrom(w => w.UserInformation.Email));
+				
 		}
 	}
 }

@@ -62,6 +62,10 @@ namespace CookBookMVC.Application.Services
 		public UserInformationVm GetUser(int userId)
 		{
 			var user = _userRepo.GetUser(userId);
+			if(user == null)
+			{
+				throw new Exception("User not found");
+			}
 			var userVm = _mapper.Map<UserInformationVm>(user);
 			return userVm;
 			//var userVm = new UserInformationVm();

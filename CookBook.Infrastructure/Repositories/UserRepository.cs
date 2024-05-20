@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CookBook.Infrastructure;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CookBookMVC.Infrastructure.Repositories
 {
@@ -40,7 +41,9 @@ namespace CookBookMVC.Infrastructure.Repositories
 
 		public User GetUser(int userId)
 		{
-			var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+			var user = _context.Users
+				.Include(u=>u.UserInformation)
+				.FirstOrDefault(u => u.Id == userId);
 			return user;
 		}
 

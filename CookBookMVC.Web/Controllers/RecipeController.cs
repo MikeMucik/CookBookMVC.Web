@@ -39,6 +39,10 @@ namespace CookBookMVC.Web.Controllers
 		public IActionResult ViewRecipeDetails(int id)
 		{
 			var recipeModel = _recipeService.GetRecipeDetails(id);
+			if (recipeModel == null)
+			{
+				return View("Error");
+			}
 
 			return View(recipeModel);
 		}

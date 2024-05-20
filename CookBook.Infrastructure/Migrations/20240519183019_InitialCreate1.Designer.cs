@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookBookMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240329111237_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240519183019_InitialCreate1")]
+    partial class InitialCreate1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,9 +71,6 @@ namespace CookBookMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -90,6 +87,9 @@ namespace CookBookMVC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AmountOfIngredients")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -130,6 +130,9 @@ namespace CookBookMVC.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("RecipeId", "IngredientId");
 
                     b.HasIndex("IngredientId");
@@ -148,8 +151,9 @@ namespace CookBookMVC.Infrastructure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Unit")
-                        .HasColumnType("int");
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -168,7 +172,10 @@ namespace CookBookMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -189,11 +196,15 @@ namespace CookBookMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -425,7 +436,7 @@ namespace CookBookMVC.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("CookBookMVC.Domain.Model.Time", "Time")
-                        .WithMany()
+                        .WithMany("Recipes")
                         .HasForeignKey("TimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -536,6 +547,11 @@ namespace CookBookMVC.Infrastructure.Migrations
             modelBuilder.Entity("CookBookMVC.Domain.Model.Recipe", b =>
                 {
                     b.Navigation("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("CookBookMVC.Domain.Model.Time", b =>
+                {
+                    b.Navigation("Recipes");
                 });
 
             modelBuilder.Entity("CookBookMVC.Domain.Model.User", b =>

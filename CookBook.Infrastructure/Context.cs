@@ -37,12 +37,12 @@ namespace CookBook.Infrastructure
 
             builder.Entity<RecipeIngredient>()
                 .HasOne<Recipe>(re => re.Recipe)
-                .WithMany(r => r.RecipeIngredients)
+                .WithMany(r => r.RecipeIngredient)
                 .HasForeignKey(re => re.RecipeId);
 
             builder.Entity<RecipeIngredient>()
                 .HasOne<Ingredient>(re => re.Ingredient)
-                .WithMany(s => s.RecipeIngredients)
+                .WithMany(s => s.RecipeIngredient)
                 .HasForeignKey(re => re.IngredientId);
         }
 
@@ -50,4 +50,4 @@ namespace CookBook.Infrastructure
 }
 //builder.Entity<RecipeIngredient>()
 //	.Property(rq => rq.Quantity)
-//	.HasField("quantity"); 
+//	.HasField("Quantity"); 

@@ -27,7 +27,7 @@ namespace CookBookMVC.Application.ViewModels.Recipe
 				.ForMember(q => q.DifficultyName, opt => opt.MapFrom(w => w.Difficulty.Name))
 				.ForMember(q => q.TimeName, opt => opt.MapFrom(w => w.Time.Amount + " " + w.Time.Unit))
 				.ForMember(q => q.AmountOfIngredients, opt => opt.MapFrom(w => w.AmountOfIngredients))
-                .ForMember(q => q.Ingredients, opt => opt.MapFrom(w => w.RecipeIngredients.Select(i => new IngredientForListVm
+                .ForMember(q => q.Ingredients, opt => opt.MapFrom(w => w.RecipeIngredient.Select(i => new IngredientForListVm
                 {
                     Id = i.Ingredient.Id,
                     Name = i.Ingredient.Name,

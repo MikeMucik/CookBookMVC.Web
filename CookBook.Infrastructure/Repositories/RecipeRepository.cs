@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CookBook.Infrastructure.Repositories
 {
@@ -49,7 +50,13 @@ namespace CookBook.Infrastructure.Repositories
 
         public Recipe GetRecipeById (int recipeId)
         {
-            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == recipeId);
+            var recipe = _context.Recipes
+                .Include(r => r.Category)
+                .Include(r => r.Difficulty)
+                .Include(r => r.Time)
+                .Include(r => r.RecipeIngredient)
+                    .ThenInclude(ri => ri.Ingredient)
+                .FirstOrDefault(r => r.Id == recipeId);                ;
             return recipe;
         }
 

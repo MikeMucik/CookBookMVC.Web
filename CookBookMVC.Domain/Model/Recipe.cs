@@ -13,7 +13,7 @@ namespace CookBookMVC.Domain.Model
 		public int CategoryId { get; set; }
 		public virtual Category Category { get; set; }
 		public int AmountOfIngredients { get; set; }
-		public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
+		public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
 		public int DifficultyId { get; set; }
 		public virtual Difficulty Difficulty { get; set; }
 		public int TimeId { get; set; }
