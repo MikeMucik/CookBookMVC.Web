@@ -13,7 +13,7 @@ namespace CookBookMVC.Application.Interfaces
 
 		void DeleteUser(int userId);
 
-		ListUserForListVm GetAllUsersForList();
+		ListUserForListVm GetAllUsersForList(int pageSize, int pageNo, string searchString);
 		
 		UserInformationVm GetUser(int userId);
 

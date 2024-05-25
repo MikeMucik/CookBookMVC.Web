@@ -9,41 +9,88 @@
 <p>
 	<a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				Id
-			</th>
-			<th>
-				Name
-			</th>
-			<th>
-				Category
-			</th>
-			
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model.Recipes)
-		{
+<form asp-action="Index" asp-controller="Recipe" method="post">
+	<div class="row">
+		<select asp-for="PageSize">
+			<option value="1">1 recipe</option> @* dodane na potrzeby prezentacji *@
+			<option value="5">5 recipes</option>
+			<option value="10">10 recipes</option>
+			<option value="20">20 recipes</option>
+			<option value="30">30 recipes</option>
+			<option value="50">50 recipes</option>
+			<option value="100">100 recipes</option>
+		</select>
+		<input type="text" asp-for="SearchString" name="searchString" id="searchString" />
+		<input type="submit" value="Wyszukaj" />
+	</div>
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Id
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Category
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Recipes)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Id)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Category)
+						</td>
+
+						<td>
+							@Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
+							@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+							@Html.ActionLink("Delete", "Delete", new { id=item.Id })
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<table>
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Id)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Name)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Category)
-				</td>
-				
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-				</td>
+				@for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+				{
+					<td>
+						@if (i != Model.CurrentPage)
+						{
+							<a href="javascript:PagerClick(@i)">@i</a>
+						}
+						else
+						{
+							<span>@i</span>
+						}
+					</td>
+				}
 			</tr>
-		}
-	</tbody>
-</table>
+		</table>
+		<input type="hidden" name="pageNo" id="pageNo" />
+		<input type="hidden" name="pageSize" id="pageSize" value="1" />
+	</div>
+</form>
+@section Scripts
+{
+	<script type="text/javascript">
+		function PagerClick(index) {
+			document.getElementById("pageNo").value = index;
+			document.forms[0].submit();
+		}	
+	</script>
+}

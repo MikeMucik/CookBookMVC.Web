@@ -14,7 +14,7 @@ namespace CookBookMVC.Application.Interfaces
 
         void DeleteRecipe(int recipeId);
 
-        ListRecipeForListVm GetAllRecipesForList();
+        ListRecipeForListVm GetAllRecipesForList(int pageSize, int pageNo, string searchString);
 
         RecipeDetailsVm GetRecipeDetails(int recipeId);
 	}

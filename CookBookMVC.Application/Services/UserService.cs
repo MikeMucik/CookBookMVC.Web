@@ -25,8 +25,9 @@ namespace CookBookMVC.Application.Services
 
 		public int AddUser(NewUserVm user)
 		{
-
-			throw new NotImplementedException();
+			var userAdd = _mapper.Map<User>(user);
+			var id = _userRepo.AddUser(userAdd);
+			return id;
 		}
 
 		public void DeleteUser(int userId)
@@ -34,13 +35,22 @@ namespace CookBookMVC.Application.Services
 			throw new NotImplementedException();
 		}
 
-		public ListUserForListVm GetAllUsersForList()
+		public ListUserForListVm GetAllUsersForList(int pageSize, int pageNo, string searchString)
 		{
 			var users = _userRepo.GetAllUsersActive()
-				.ProjectTo<UserForListVm>(_mapper.ConfigurationProvider).ToList();
+				.Where(p => p.UserName.StartsWith(searchString))
+				.ProjectTo<UserForListVm>(_mapper.ConfigurationProvider)
+				.ToList();
+			var usersToShow = users
+				.Skip(pageSize * (pageNo - 1))
+				.Take(pageSize)
+				.ToList();
 			var userList = new ListUserForListVm()
 			{
-				Users = users,
+				PageSize = pageSize,
+				CurrentPage = pageNo,
+				SearchString = searchString, 
+				Users = usersToShow,
 				Count = users.Count
 			};
 			return userList;
@@ -62,7 +72,7 @@ namespace CookBookMVC.Application.Services
 		public UserInformationVm GetUser(int userId)
 		{
 			var user = _userRepo.GetUser(userId);
-			if(user == null)
+			if (user == null)
 			{
 				throw new Exception("User not found");
 			}

@@ -32,14 +32,23 @@ namespace CookBookMVC.Application.Services
 		}
 			
 
-		public ListRecipeForListVm GetAllRecipesForList()
+		public ListRecipeForListVm GetAllRecipesForList(int pageSize, int pageNo, string searchString)
 		{
 			var recipes = _recipeRepo.GetAllRecipes()
-				.ProjectTo<RecipeForListVm>(_mapper.ConfigurationProvider).ToList();
+				.Where(r => r.Name.Contains(searchString))
+				.ProjectTo<RecipeForListVm>(_mapper.ConfigurationProvider)
+				.ToList();
+			var recipesToShow = recipes
+				.Skip(pageSize*(pageNo-1))
+				.Take(pageSize)
+				.ToList();
 			var recipeVm = new ListRecipeForListVm()
 			{
-				Recipes = recipes,
-				Count = recipes.Count()
+				PageSize = pageSize,
+				CurrentPage = pageNo,
+				SearchString = searchString,
+				Recipes = recipesToShow,
+				Count = recipes.Count
 			};
 			return recipeVm;
 

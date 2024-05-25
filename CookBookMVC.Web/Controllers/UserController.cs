@@ -1,5 +1,6 @@
 ﻿using CookBookMVC.Application.Interfaces;
 using CookBookMVC.Application.Services;
+using CookBookMVC.Application.ViewModels.User;
 using CookBookMVC.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace CookBookMVC.Web.Controllers
 			_userService = userService;
             
         }
+		[HttpGet]
         public IActionResult Index()
 		{
 			//utworzyć widok dla tej akcji
@@ -23,22 +25,36 @@ namespace CookBookMVC.Web.Controllers
 			//serwis musi przygotować 
 			//serwis musi zwrócić dane w odpowiednim formacie
 
-			var model = _userService.GetAllUsersForList();
+			var model = _userService.GetAllUsersForList(2, 1, "");// tu w pierwszej zmiennej podajmy ilośc rekordów na stronę
+			return View(model);
+		}
+		[HttpPost]
+		public IActionResult Index(int pageSize, int? pageNo, string searchString)
+		{
+			if (!pageNo.HasValue)
+			{
+				pageNo = 1;	
+			}
+			if (searchString is null)
+			{
+				searchString = String.Empty;
+			}
+			var model = _userService.GetAllUsersForList(pageSize, (int)pageNo, searchString);
 			return View(model);
 		}
 
 		[HttpGet]
 		public IActionResult AddUser()
 		{
-			return View();
+			return View(new NewUserVm());
 		}
 
-		//[HttpPost]
-		//public IActionResult AddUser(UserModel model)
-		//{
-		//	var id = _userService.AddUser(model);
-		//	return View();
-		//}
+		[HttpPost]
+		public IActionResult AddUser(NewUserVm model)
+		{
+			var id = _userService.AddUser(model);
+			return View();
+		}
 
 		[HttpGet]
 		public IActionResult AddNewUserInformation(int userId)
