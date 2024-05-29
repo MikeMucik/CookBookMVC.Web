@@ -53,13 +53,14 @@ namespace CookBookMVC.Web.Controllers
 		public IActionResult AddUser(NewUserVm model)
 		{
 			var id = _userService.AddUser(model);
-			return View();
+			return RedirectToAction("Index");
 		}
 
 		[HttpGet]
 		public IActionResult AddNewUserInformation(int userId)
 		{
-			return View();
+			var idAdd = _userService.AddInformation(userId);
+			return RedirectToAction("Index");
 		}
 
 		//[HttpPost]

@@ -18,5 +18,6 @@ namespace CookBookMVC.Domain.Interface
 		User GetUser(int userId);
 
 		int UpdateUser(User user);
+		int AddInformationToUser(UserInformation userInformation);
 	}
 }

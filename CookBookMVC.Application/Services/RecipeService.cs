@@ -23,7 +23,9 @@ namespace CookBookMVC.Application.Services
         }
         public int AddRecipe(NewRecipeVm recipe)
 		{
-			throw new NotImplementedException();
+			var recipeAdd = _mapper.Map<Recipe>(recipe);
+			var recipeId = _recipeRepo.AddRecipe(recipeAdd);
+			return recipeId;			
 		}
 
 		public void DeleteRecipe(int recipeId)

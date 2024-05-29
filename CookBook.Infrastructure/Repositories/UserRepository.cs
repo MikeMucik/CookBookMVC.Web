@@ -17,7 +17,13 @@ namespace CookBookMVC.Infrastructure.Repositories
 		{
 			_context = context;
 		}
-		public int AddUser(User user)
+
+        public int AddInformationToUser(UserInformation userInformation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddUser(User user)
 		{
 			_context.Users.Add(user);
 			_context.SaveChanges();

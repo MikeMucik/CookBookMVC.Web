@@ -9,7 +9,8 @@ namespace CookBookMVC.Application.Interfaces
 {
 	public interface IUserService
 	{
-		int AddUser(NewUserVm user);
+        object AddInformation(int userId);
+        int AddUser(NewUserVm user);
 
 		void DeleteUser(int userId);
 

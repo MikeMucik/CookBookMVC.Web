@@ -1,0 +1,116 @@
+﻿@model CookBookMVC.Application.ViewModels.Recipe.NewRecipeVm
+
+@{
+	ViewData["Title"] = "AddRecipe";
+}
+
+<h1>AddRecipe</h1>
+
+<h4>NewRecipeVm</h4>
+<hr />
+<div class="row">
+	<div class="col-md-12">
+		<form asp-action="AddRecipe">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<input type="hidden" asp-for="Id" />
+
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Category" class="control-label"></label>
+				<input asp-for="Category" class="form-control" />
+				<span asp-validation-for="Category" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AmountOfIngredients" class="control-label"></label>
+				<input asp-for="AmountOfIngredients" class="form-control" id="amountOfIngredients" />
+				<span asp-validation-for="AmountOfIngredients" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label>Ingredients</label>
+				<div class="row" id="ingredient-container" </div>
+			</div>
+			<div class="form-group">
+				<label asp-for="Difficulty" class="control-label"></label>
+				<input asp-for="Difficulty" class="form-control" />
+				<span asp-validation-for="Difficulty" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TimeAmount" class="control-label"></label>
+				<input asp-for="TimeAmount" class="form-control" />
+				<span asp-validation-for="TimeAmount" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TimeUnit" class="control-label"></label>
+				<input asp-for="TimeUnit" class="form-control" />
+				<span asp-validation-for="TimeUnit" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Description" class="control-label"></label>
+				<input asp-for="Description" class="form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+
+			
+			<div class="form-group mt-3">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script>
+		// Funkcja dodająca nowe pola dla kolejnych składników
+		document.addEventListener("DOMContentLoaded", function () {
+			document.getElementById("amountOfIngredients").addEventListener("input", function () {
+				var amount = parseInt(this.value);
+				var container = document.getElementById("ingredient-container");
+				container.innerHTML = "";
+
+				if (!isNaN(amount) && amount > 0) {
+					for (var i = 0; i < amount; i++) {
+						var newIngredientHtml = `
+													<div class = "row mb-2">
+															<div class="col-md-4">
+																<div class="ingredient">
+																	<label>Name</label>
+																	<input name="Ingredients[${i}].Name" class="form-control" />
+																	<span class="text-danger"></span>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="ingredient">
+																	<label>Quantity</label>
+																	<input name="Ingredients[${i}].Quantity" class="form-control" />
+																	<span class="text-danger"></span>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="ingredient">
+																	<label>Unit</label>
+																	<input name="Ingredients[${i}].Unit" class="form-control" />
+																	<span class="text-danger"></span>
+																</div>
+															</div>
+														</div>
+															`;
+
+						container.insertAdjacentHTML("beforeend", newIngredientHtml);
+					}
+				}
+			});
+		});
+	</script>
+}
