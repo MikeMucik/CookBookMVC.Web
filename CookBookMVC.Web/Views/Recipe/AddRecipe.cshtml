@@ -20,11 +20,14 @@
 				<input asp-for="Name" class="form-control" />
 				<span asp-validation-for="Name" class="text-danger"></span>
 			</div>
+
 			<div class="form-group">
-				<label asp-for="Category" class="control-label"></label>
-				<input asp-for="Category" class="form-control" />
-				<span asp-validation-for="Category" class="text-danger"></span>
+				<label asp-for="CategoryId" class="control-label"></label>
+				@* Użyj DropDownList dla kategorii *@
+				<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+				<span asp-validation-for="CategoryId" class="text-danger"></span>
 			</div>
+			
 			<div class="form-group">
 				<label asp-for="AmountOfIngredients" class="control-label"></label>
 				<input asp-for="AmountOfIngredients" class="form-control" id="amountOfIngredients" />
@@ -35,10 +38,21 @@
 				<div class="row" id="ingredient-container" </div>
 			</div>
 			<div class="form-group">
-				<label asp-for="Difficulty" class="control-label"></label>
-				<input asp-for="Difficulty" class="form-control" />
-				<span asp-validation-for="Difficulty" class="text-danger"></span>
+				<label asp-for="DifficultyId" class="control-label"></label>
+				@*Użyj DropDownList dla trudnosci*@
+				<select asp-for="DifficultyId" class="form-control" asp-items="ViewBag.Difficulties"></select>
+				<span asp-validation-for="DifficultyId" class="text-danger"></span>
 			</div>
+
+			@Html.Partial("_NewTimeAdd", Model)
+
+			@*<div class="form-group">
+				<label asp-for="TimeId" class="control-label"></label>
+				@*Użyj DropDownList dla czasu*@@*
+				<select asp-for="TimeId" class="form-control" asp-items="ViewBag.Times"></select>
+				<span asp-validation-for="TimeId" class="text-danger"></span>
+			</div>
+
 			<div class="form-group">
 				<label asp-for="TimeAmount" class="control-label"></label>
 				<input asp-for="TimeAmount" class="form-control" />
@@ -49,6 +63,7 @@
 				<input asp-for="TimeUnit" class="form-control" />
 				<span asp-validation-for="TimeUnit" class="text-danger"></span>
 			</div>
+	*@
 			<div class="form-group">
 				<label asp-for="Description" class="control-label"></label>
 				<input asp-for="Description" class="form-control" />
@@ -72,7 +87,7 @@
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 	<script>
-		// Funkcja dodająca nowe pola dla kolejnych składników
+		// Funkcja dodająca nowe pola dla kolejnych składników, do zrobienia by wybierać z listy
 		document.addEventListener("DOMContentLoaded", function () {
 			document.getElementById("amountOfIngredients").addEventListener("input", function () {
 				var amount = parseInt(this.value);
@@ -82,29 +97,29 @@
 				if (!isNaN(amount) && amount > 0) {
 					for (var i = 0; i < amount; i++) {
 						var newIngredientHtml = `
-													<div class = "row mb-2">
-															<div class="col-md-4">
-																<div class="ingredient">
-																	<label>Name</label>
-																	<input name="Ingredients[${i}].Name" class="form-control" />
-																	<span class="text-danger"></span>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="ingredient">
-																	<label>Quantity</label>
-																	<input name="Ingredients[${i}].Quantity" class="form-control" />
-																	<span class="text-danger"></span>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="ingredient">
-																	<label>Unit</label>
-																	<input name="Ingredients[${i}].Unit" class="form-control" />
-																	<span class="text-danger"></span>
-																</div>
-															</div>
-														</div>
+							<div class = "row mb-2">
+								<div class="col-md-4">
+									<div class="ingredient">
+										<label>Name</label>
+										<input name="Ingredients[${i}].Name" class="form-control" />
+										<span class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="ingredient">
+										<label>Quantity</label>
+										<input name="Ingredients[${i}].Quantity" class="form-control" />
+										<span class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="ingredient">
+										<label>Unit</label>
+										<input name="Ingredients[${i}].Unit" class="form-control" />
+										<span class="text-danger"></span>
+									</div>
+								</div>
+							</div>
 															`;
 
 						container.insertAdjacentHTML("beforeend", newIngredientHtml);

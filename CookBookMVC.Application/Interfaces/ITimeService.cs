@@ -7,10 +7,10 @@ using CookBookMVC.Application.ViewModels.Recipe;
 
 namespace CookBookMVC.Application.Interfaces
 {
-	public interface ICategoryService
+	public interface ITimeService
 	{
-		int AddCategory(CategoryForListVm category);
-		void DeleteCategory(int categoryId);
-		ListCategoryForListVm GetListCategoryForList();
+		TimeForListVm GetTimeById (int id);
+		int AddTimeToRecipe (TimeForListVm time);
+		ListTimeForListVm GetListTimeForList();
 	}
 }

@@ -7,10 +7,10 @@ using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Domain.Interface
 {
-	public interface ICategoryRepository
+	public interface ITimeRepository
 	{
-		int AddCategory (Category category);
-		void DeleteCategory(int categoryId);
-		IEnumerable<Category> GetAllCategories();
+		int AddTime (Time time);
+		IEnumerable<Time> GetAllTimes();
+		Time GetById (int id);
 	}
 }

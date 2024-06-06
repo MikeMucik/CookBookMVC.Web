@@ -34,9 +34,9 @@ namespace CookBookMVC.Infrastructure.Repositories
 			}
 		}
 
-		public IQueryable<Category> GetAllCategories()
+		public IEnumerable<Category> GetAllCategories()
 		{
-			return _context.Categories;
+			return _context.Categories.ToList();
 		}
 	}
 }

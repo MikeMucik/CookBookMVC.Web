@@ -36,13 +36,12 @@ namespace CookBookMVC.Application.Services
 
 		public ListCategoryForListVm GetListCategoryForList()
 		{
-			
-			var categories = _categoryRepo.GetAllCategories()
-				.ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider)
-				.ToList();
-			var categoryList = new ListCategoryForListVm()
+
+			var categories = _categoryRepo.GetAllCategories();
+			var categoryVms = _mapper.Map<List<CategoryForListVm>>(categories);
+			var categoryList = new ListCategoryForListVm
 			{
-				Categories = categories
+				Categories = categoryVms,
 			};
 			return categoryList;// tu może jest źle
 		}

@@ -11,15 +11,14 @@ namespace CookBookMVC.Web.Controllers
 	{
 		private readonly IRecipeService _recipeService;
 		private readonly ICategoryService _categoryService;
-		public RecipeController(IRecipeService recipeService)
-		{
-			_recipeService = recipeService;
-
-		}
-		public RecipeController(IRecipeService recipeService, ICategoryService categoryService) 
+		private readonly IDifficultyService _difficultyService;
+		private readonly ITimeService _timeService;
+		public RecipeController(IRecipeService recipeService, ICategoryService categoryService, IDifficultyService difficultyService, ITimeService timeService)
 		{
 			_recipeService = recipeService;
 			_categoryService = categoryService;
+			_difficultyService = difficultyService;
+			_timeService = timeService;
 		}
 
 		[HttpGet]
@@ -32,7 +31,7 @@ namespace CookBookMVC.Web.Controllers
 			//przekazać filtry do serwisu
 			//serwis musi przygotować 
 			//serwis musi zwrócić dane w odpowiednim formacie
-			var model = _recipeService.GetAllRecipesForList(3, 1, "");
+			var model = _recipeService.GetAllRecipesForList(10, 1, "");
 			return View(model);
 		}
 
@@ -49,26 +48,60 @@ namespace CookBookMVC.Web.Controllers
 			}
 			var model = _recipeService.GetAllRecipesForList(pageSize, (int)pageNo, searchString);
 			return View(model);
-
 		}
 
 		[HttpGet]
 		public IActionResult AddRecipe()
 		{
-			var category = _categoryService.GetListCategoryForList();
-			//ViewBag.Category = category.Select(categ => new SelectListItem
-			//{
-			//	Value = categ.Id.ToString(),
-			//	Text = categ.Name
-			//}).ToList();
+			FillViewBags();
+
 			return View(new NewRecipeVm());
 		}
+
 		[HttpPost]
 		public IActionResult AddRecipe(NewRecipeVm model)
 		{
-			var id = _recipeService.AddRecipe(model);
-			return RedirectToAction("Index");
+			if (ModelState.IsValid)
+			{
+				if (model.TimeId != 0)
+				{
+					var selectedTime = _timeService.GetTimeById(model.TimeId);
+					if (selectedTime != null)
+					{
+						model.TimeAmount = selectedTime.Amount;
+						model.TimeUnit = selectedTime.Unit;
+					}
+				}
+				else if (model.TimeAmount != 0 && !string.IsNullOrEmpty(model.TimeUnit))
+				{
+					var newTime = new TimeForListVm
+					{
+						Amount = model.TimeAmount,
+						Unit = model.TimeUnit
+					};
+					model.TimeId = _timeService.AddTimeToRecipe(newTime);
+				}
+				else
+				{
+					ModelState.AddModelError("", "You must select existing time or provide new time");
+					FillViewBags();
+					return View(model);
+				}
+				var id = _recipeService.AddRecipe(model);
+				return RedirectToAction("Index");
+			}
+			//foreach (var modelState in ModelState.Values)
+			//{
+			//	foreach (var error in modelState.Errors)
+			//	{
+			//		Console.WriteLine(error.ErrorMessage);
+			//	}
+			//}
+			FillViewBags();
+
+			return View(model);
 		}
+
 		[HttpGet]
 		public IActionResult ViewRecipeDetails(int id)
 		{
@@ -79,6 +112,42 @@ namespace CookBookMVC.Web.Controllers
 			}
 
 			return View(recipeModel);
+		}
+		public void FillViewBags()
+		{
+			var categoryListVm = _categoryService.GetListCategoryForList();
+			ViewBag.Categories = categoryListVm.Categories.Select(categ => new SelectListItem
+			{
+				Value = categ.Id.ToString(),
+				Text = categ.Name
+			}).ToList();
+			foreach (var item in ViewBag.Categories)
+			{
+				Console.WriteLine($"Category: {item.Text}, Value: {item.Value}");
+			}
+			var difficultyListVm = _difficultyService.GetListDifficultyForList();
+			ViewBag.Difficulties = difficultyListVm.Difficulties.Select(diff => new SelectListItem
+			{
+				Value = diff.Id.ToString(),
+				Text = diff.Name
+			}).ToList();
+			foreach (var item in ViewBag.Difficulties)
+			{
+				Console.WriteLine($"Difficulty: {item.Text}, Value: {item.Value}");
+			}
+			var timeListVm = _timeService.GetListTimeForList();
+			if (timeListVm == null)
+			{
+				Console.WriteLine("timelistVm jest pusta");
+			}
+			else
+			{
+				ViewBag.Times = timeListVm.Times.Select(tim => new SelectListItem
+				{
+					Value = tim.Id.ToString(),
+					Text = tim.Amount.ToString() + " " + tim.Unit
+				});
+			}
 		}
 
 	}

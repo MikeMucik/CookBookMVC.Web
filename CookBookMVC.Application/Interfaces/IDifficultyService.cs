@@ -7,10 +7,10 @@ using CookBookMVC.Application.ViewModels.Recipe;
 
 namespace CookBookMVC.Application.Interfaces
 {
-	public interface ICategoryService
+	public interface IDifficultyService
 	{
-		int AddCategory(CategoryForListVm category);
-		void DeleteCategory(int categoryId);
-		ListCategoryForListVm GetListCategoryForList();
+		int AddDifficulty(DifficultyForListVm difficulty);
+		void DeleteDifficulty(int difficultyId);
+		ListDifficultyForListVm GetListDifficultyForList();//
 	}
 }

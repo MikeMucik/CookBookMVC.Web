@@ -7,10 +7,10 @@ using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Domain.Interface
 {
-	public interface ICategoryRepository
+	public interface IDifficultyRepository
 	{
-		int AddCategory (Category category);
-		void DeleteCategory(int categoryId);
-		IEnumerable<Category> GetAllCategories();
+		int AddDiffuclty(Difficulty difficulty);
+		void DeleteDifficulty(int difficultyId);
+		IEnumerable<Difficulty> GetAllDifficulties();
 	}
 }
