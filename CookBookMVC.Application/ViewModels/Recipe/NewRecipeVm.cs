@@ -17,18 +17,21 @@ namespace CookBookMVC.Application.ViewModels.Recipe
         public int AmountOfIngredients { get; set; }
         public List<IngredientForListVm> Ingredients { get; set; } = new List<IngredientForListVm>(); //? to do zmiany by wybierać składnik z listy bądź dodać nowy
         public int DifficultyId { get; set; }
-        public int TimeId { get; set; }
-        public int TimeAmount { get; set; }
-        public string TimeUnit { get; set; }
+        public int? TimeId { get; set; }
+        public int? TimeAmount { get; set; }
+        public string? TimeUnit { get; set; }
         public string Description { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<NewRecipeVm, CookBookMVC.Domain.Model.Recipe>()
                 .ForMember(r=> r.TimeId, opt=> opt.MapFrom(t=>t.TimeId))
-                .ForMember(r=> r.Time, opt => opt.MapFrom(t=>  new Time
+                .ForMember(r => r.Time, opt => opt.MapFrom(t => 
+                t.TimeId.HasValue
+                ? null 
+                :new Time
                 {
-                Amount = t.TimeAmount,
+                    Amount = (int)t.TimeAmount,
                     Unit = t.TimeUnit,
                 }))
                 .ForMember(r => r.CategoryId, opt => opt.MapFrom(w => w.CategoryId))

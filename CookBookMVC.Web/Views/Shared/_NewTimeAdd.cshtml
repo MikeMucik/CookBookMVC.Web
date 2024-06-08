@@ -1,47 +1,56 @@
-﻿@model CookBookMVC.Application.ViewModels.Recipe.TimeForListVm
+﻿@model CookBookMVC.Application.ViewModels.Recipe.NewRecipeVm
 
 <div class="form-group">
-    <label asp-for="Id" class="control-label"></label>
-    <select asp-for="Id" class="form-control" id="time-dropdown">
+    <label asp-for="TimeId" class="control-label"></label>
+    <select asp-for="TimeId" class="form-control" id="time-dropdown">
         <option value="">Select existing time</option>
         @foreach (var time in ViewBag.Times)
         {
             <option value="@time.Value">@time.Text</option>
         }
     </select>
-    <span asp-validation-for="Id" class="text-danger"></span>
+    <span asp-validation-for="TimeId" class="text-danger"></span>
 </div>
 
-<!-- Input fields for entering new time values, initially hidden -->
+
 <div class="form-group" id="new-time-fields" style="display: none;">
-    <label asp-for="Amount" class="control-label">Amount:</label>
-    <input asp-for="Amount" class="form-control" />
-    <span asp-validation-for="Amount" class="text-danger"></span>
+    <label asp-for="TimeAmount" class="control-label">Amount:</label>
+    <input asp-for="TimeAmount" class="form-control" />
+    <span asp-validation-for="TimeAmount" class="text-danger"></span>
 
-    <label asp-for="Unit" class="control-label">Unit:</label>
-    <input asp-for="Unit" class="form-control" />
-    <span asp-validation-for="Unit" class="text-danger"></span>
+    <label asp-for="TimeUnit" class="control-label">Unit:</label>
+    <input asp-for="TimeUnit" class="form-control" />
+    <span asp-validation-for="TimeUnit" class="text-danger"></span>
 </div>
 
-<!-- Button to toggle the visibility of new time input fields -->
+
 <button type="button" class="btn btn-primary" id="show-new-time-fields">Add New Time</button>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Show or hide the new time input fields based on the dropdown selection
+    <script type="text/javascript">
+        $(window).on("load", function () {
+            alert("Skrypt został wywołany po załadowaniu strony.");
+            // Sprawdź początkowy stan dropdownu i pokaż/ukryj pola
+            if ($("#time-dropdown").val() === "Select existing time") {
+                $("#new-time-fields").show();
+            } else {
+                $("#new-time-fields").hide();
+            }
+
+            // Obsługa zmiany wartości w dropdownie
             $("#time-dropdown").change(function () {
-                if ($(this).val() === "") {
+                if ($(this).val() === "Select existing time") {
                     $("#new-time-fields").show();
                 } else {
                     $("#new-time-fields").hide();
                 }
             });
 
-            // Toggle the visibility of the new time input fields when the button is clicked
+            // Obsługa kliknięcia przycisku
             $("#show-new-time-fields").click(function () {
                 $("#new-time-fields").toggle();
             });
         });
+
     </script>
 }

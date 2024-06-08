@@ -31,7 +31,7 @@ namespace CookBookMVC.Web.Controllers
 			//przekazać filtry do serwisu
 			//serwis musi przygotować 
 			//serwis musi zwrócić dane w odpowiednim formacie
-			var model = _recipeService.GetAllRecipesForList(10, 1, "");
+			var model = _recipeService.GetAllRecipesForList(20, 1, "");
 			return View(model);
 		}
 
@@ -63,20 +63,22 @@ namespace CookBookMVC.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				if (model.TimeId != 0)
+				if (model.TimeId.HasValue)
 				{
-					var selectedTime = _timeService.GetTimeById(model.TimeId);
+					Console.WriteLine("TimeId ma wartość");
+					var selectedTime = _timeService.GetTimeById((int)model.TimeId);
 					if (selectedTime != null)
 					{
 						model.TimeAmount = selectedTime.Amount;
 						model.TimeUnit = selectedTime.Unit;
 					}
 				}
-				else if (model.TimeAmount != 0 && !string.IsNullOrEmpty(model.TimeUnit))
+				else
+				if (model.TimeAmount != 0 && !string.IsNullOrEmpty(model.TimeUnit))
 				{
 					var newTime = new TimeForListVm
 					{
-						Amount = model.TimeAmount,
+						Amount = (int)model.TimeAmount,
 						Unit = model.TimeUnit
 					};
 					model.TimeId = _timeService.AddTimeToRecipe(newTime);
@@ -90,13 +92,8 @@ namespace CookBookMVC.Web.Controllers
 				var id = _recipeService.AddRecipe(model);
 				return RedirectToAction("Index");
 			}
-			//foreach (var modelState in ModelState.Values)
-			//{
-			//	foreach (var error in modelState.Errors)
-			//	{
-			//		Console.WriteLine(error.ErrorMessage);
-			//	}
-			//}
+			else { Console.WriteLine(Console.Error); }
+			
 			FillViewBags();
 
 			return View(model);
@@ -136,17 +133,14 @@ namespace CookBookMVC.Web.Controllers
 				Console.WriteLine($"Difficulty: {item.Text}, Value: {item.Value}");
 			}
 			var timeListVm = _timeService.GetListTimeForList();
-			if (timeListVm == null)
-			{
-				Console.WriteLine("timelistVm jest pusta");
-			}
-			else
-			{
-				ViewBag.Times = timeListVm.Times.Select(tim => new SelectListItem
+			ViewBag.Times = timeListVm.Times.Select(tim => new SelectListItem
 				{
 					Value = tim.Id.ToString(),
 					Text = tim.Amount.ToString() + " " + tim.Unit
 				});
+			foreach (var item in ViewBag.Times)
+			{
+				Console.WriteLine($"Time: {item.Text}, Value: {item.Value}");
 			}
 		}
 

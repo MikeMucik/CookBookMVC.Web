@@ -16,7 +16,7 @@ namespace CookBookMVC.Domain.Model
 		public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
 		public int DifficultyId { get; set; }
 		public virtual Difficulty Difficulty { get; set; }
-		public int TimeId { get; set; }
+		public int? TimeId { get; set; }
 		public virtual Time Time { get; set; }
 		public string Description { get; set; }
 	}

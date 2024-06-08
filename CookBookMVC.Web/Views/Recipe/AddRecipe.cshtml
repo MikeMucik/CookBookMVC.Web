@@ -44,25 +44,33 @@
 				<span asp-validation-for="DifficultyId" class="text-danger"></span>
 			</div>
 
-			@Html.Partial("_NewTimeAdd", Model)
-
-			@*<div class="form-group">
+			<div class="form-group">
 				<label asp-for="TimeId" class="control-label"></label>
-				@*Użyj DropDownList dla czasu*@@*
-				<select asp-for="TimeId" class="form-control" asp-items="ViewBag.Times"></select>
-				<span asp-validation-for="TimeId" class="text-danger"></span>
+				<select asp-for="TimeId" class="form-control" id="time-dropdown">
+					<option value="">Select existing time</option>
+					@foreach (var time in ViewBag.Times)
+					{
+						<option value="@time.Value">@time.Text</option>
+					}
+				</select>
+				@*<span asp-validation-for="TimeId" class="text-danger"></span>*@
 			</div>
 
-			<div class="form-group">
-				<label asp-for="TimeAmount" class="control-label"></label>
+
+			<div class="form-group" id="new-time-fields" style="display: none;">
+				<label asp-for="TimeAmount" class="control-label">Amount:</label>
 				<input asp-for="TimeAmount" class="form-control" />
-				<span asp-validation-for="TimeAmount" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="TimeUnit" class="control-label"></label>
+				@*<span asp-validation-for="TimeAmount" class="text-danger"></span>*@
+
+				<label asp-for="TimeUnit" class="control-label">Unit:</label>
 				<input asp-for="TimeUnit" class="form-control" />
-				<span asp-validation-for="TimeUnit" class="text-danger"></span>
+				@*<span asp-validation-for="TimeUnit" class="text-danger"></span>*@
 			</div>
+
+
+			<button type="button" class="btn btn-primary" id="show-new-time-fields">Add New Time</button>
+
+			@*await Html.PartialAsync("_NewTimeAdd", Model)
 	*@
 			<div class="form-group">
 				<label asp-for="Description" class="control-label"></label>
@@ -128,4 +136,28 @@
 			});
 		});
 	</script>
+<script type="text/javascript">
+	$(window).on("load", function () {
+		if ($("#time-dropdown").val() === "Select existing time") {
+			$("#new-time-fields").show();
+		} else {
+			$("#new-time-fields").hide();
+		}
+
+		// Obsługa zmiany wartości w dropdownie
+		$("#time-dropdown").change(function () {
+			if ($(this).val() === "Select existing time") {
+				$("#new-time-fields").show();
+			} else {
+				$("#new-time-fields").hide();
+			}
+		});
+
+		// Obsługa kliknięcia przycisku
+		$("#show-new-time-fields").click(function () {
+			$("#new-time-fields").toggle();
+		});
+	});		
+	</script>
 }
+	
