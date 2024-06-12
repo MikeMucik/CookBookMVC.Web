@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CookBookMVC.Application.Interfaces;
+using CookBookMVC.Application.ViewModels.Ingredient;
 using CookBookMVC.Application.ViewModels.Recipe;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.Services
 {
-	public class RecipeService : IRecipeService
+    public class RecipeService : IRecipeService
 	{
 		private readonly IRecipeRepository _recipeRepo;
 		private readonly IMapper _mapper;

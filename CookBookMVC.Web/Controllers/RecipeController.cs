@@ -3,6 +3,8 @@ using System.Linq;
 using CookBookMVC.Application.ViewModels.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CookBookMVC.Application.ViewModels.Time;
+using CookBookMVC.Domain.Model;
 
 
 namespace CookBookMVC.Web.Controllers
@@ -13,12 +15,18 @@ namespace CookBookMVC.Web.Controllers
 		private readonly ICategoryService _categoryService;
 		private readonly IDifficultyService _difficultyService;
 		private readonly ITimeService _timeService;
-		public RecipeController(IRecipeService recipeService, ICategoryService categoryService, IDifficultyService difficultyService, ITimeService timeService)
+		private readonly IIngredientService _ingredientService;
+		public RecipeController(IRecipeService recipeService,
+			ICategoryService categoryService, 
+			IDifficultyService difficultyService, 
+			ITimeService timeService,
+			IIngredientService ingredientService)
 		{
 			_recipeService = recipeService;
 			_categoryService = categoryService;
 			_difficultyService = difficultyService;
 			_timeService = timeService;
+			_ingredientService = ingredientService;
 		}
 
 		[HttpGet]
@@ -87,7 +95,13 @@ namespace CookBookMVC.Web.Controllers
 					FillViewBags();
 					return View(model);
 				}
-				//if (model.Ingredients.IngredientId) ;
+				if (model.IngredientsWithQuantity != null)
+                    foreach (var ingredient in model.IngredientsWithQuantity)
+                    {
+                        var selectedIngredient = _ingredientService.GetIngredientById(ingredient.IngredientId);
+
+                    }
+                
 					var id = _recipeService.AddRecipe(model);
 				return RedirectToAction("Index");
 				
@@ -141,6 +155,12 @@ namespace CookBookMVC.Web.Controllers
 			{
 				Console.WriteLine($"Time: {item.Text}, Value: {item.Value}");
 			}
+			var ingredientListVm = _ingredientService.GetAllIngredients();
+			ViewBag.Ingredients = ingredientListVm.Ingredients.Select(ing => new SelectListItem
+			{
+				Value = ing.Id.ToString(),
+				Text = ing.Name + " " + ing.Unit
+			});
 		}
 
 	}

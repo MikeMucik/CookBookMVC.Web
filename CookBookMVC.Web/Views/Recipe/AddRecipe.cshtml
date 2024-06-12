@@ -105,31 +105,28 @@
 				if (!isNaN(amount) && amount > 0) {
 					for (var i = 0; i < amount; i++) {
 						var newIngredientHtml = `
-							<div class = "row mb-2">
-								<div class="col-md-4">
-									<div class="ingredient">
-										<label>Name</label>
-										<input name="Ingredients[${i}].Name" class="form-control" />
-										<span class="text-danger"></span>
+									<div class="row mb-2">
+										<div class="col-md-6">
+											<div class="ingredient">
+												<label>Ingredient</label>
+												<select name="IngredientsWithQuantity[${i}].IngredientId" class="form-control">
+		@foreach (var item in ViewBag.Ingredients)
+		{
+															<option value="@item.Value">@item.Text</option>
+		}
+												</select>
+												<span class="text-danger"></span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="ingredient">
+												<label>Quantity</label>
+												<input name="IngredientsWithQuantity[${i}].Quantity" class="form-control" type="number" min="0" />
+												<span class="text-danger"></span>
+											</div>
+										</div>
 									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="ingredient">
-										<label>Quantity</label>
-										<input name="Ingredients[${i}].Quantity" class="form-control" />
-										<span class="text-danger"></span>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="ingredient">
-										<label>Unit</label>
-										<input name="Ingredients[${i}].Unit" class="form-control" />
-										<span class="text-danger"></span>
-									</div>
-								</div>
-							</div>
-															`;
-
+								`;
 						container.insertAdjacentHTML("beforeend", newIngredientHtml);
 					}
 				}

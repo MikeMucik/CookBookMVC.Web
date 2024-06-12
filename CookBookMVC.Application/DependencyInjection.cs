@@ -19,8 +19,8 @@ namespace CookBookMVC.Application
 			services.AddTransient<IDifficultyService, DifficultyService>();
 			services.AddTransient<ICategoryService, CategoryService>();
 			services.AddTransient<ITimeService, TimeService>();
+			services.AddTransient<IIngredientService, IngredientService>();
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
-			
 			return services;
 		}
 	}

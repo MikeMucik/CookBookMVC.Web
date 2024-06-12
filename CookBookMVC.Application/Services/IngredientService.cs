@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CookBookMVC.Application.Interfaces;
-using CookBookMVC.Application.ViewModels.Recipe;
+using CookBookMVC.Application.ViewModels.Ingredient;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.Services
 {
-	public class IngredientService : IIngredientService
+    public class IngredientService : IIngredientService
 	{
 		private readonly IIngredientRepository _ingredientRepo;
 		private readonly IMapper _mapper;
@@ -40,12 +40,12 @@ namespace CookBookMVC.Application.Services
 			
 		}
 
-		public IngredientForListVm GetIngredientById(int id)
+		public IngredientNotQuantityForListVm GetIngredientById(int id)
 		{
 			var ingredientSelected = _ingredientRepo.GetIngredientById(id);
-			var ingredientVms = _mapper.Map<IngredientForListVm>(ingredientSelected);
+			var ingredientVms = _mapper.Map<IngredientNotQuantityForListVm>(ingredientSelected);
 			return ingredientVms;
-			throw new NotImplementedException();
+			
 		}
 	}
 }

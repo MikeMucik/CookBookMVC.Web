@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CookBookMVC.Application.Mapping;
+using CookBookMVC.Application.ViewModels.Ingredient;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.ViewModels.Recipe
@@ -15,7 +16,7 @@ namespace CookBookMVC.Application.ViewModels.Recipe
         public string Name { get; set; }
         public int CategoryId { get; set; } //
         public int AmountOfIngredients { get; set; }
-        public List<IngredientForListVm> IngredientsWithQuantity { get; set; } = new List<IngredientForListVm>(); //? to do zmiany by wybierać składnik z listy bądź dodać nowy
+        public List<IngredientSelectVm> IngredientsWithQuantity { get; set; } = new List<IngredientSelectVm>(); //? to do zmiany by wybierać składnik z listy bądź dodać nowy
         public int DifficultyId { get; set; }
         public int? TimeId { get; set; }
         public int? TimeAmount { get; set; }
@@ -38,16 +39,16 @@ namespace CookBookMVC.Application.ViewModels.Recipe
                 .ForMember(r => r.DifficultyId, opt => opt.MapFrom(e => e.DifficultyId))
                 .ForMember(r => r.RecipeIngredient, opt => opt.MapFrom(vm => vm.IngredientsWithQuantity.Select(i => new RecipeIngredient
                 {
-                    IngredientId = i.Id,
+                    IngredientId = i.IngredientId,
                     Quantity = i.Quantity,
-                    Ingredient =              
+                   // Ingredient =              
 
-                    new Ingredient
-                    {
-                        Id = i.Id,
-                        Name = i.Name,
-                        Unit = i.Unit
-                    }
+                    //new Domain.Model.Ingredient
+                    //{
+                    //    Id = i.Id,
+                    //    Name = i.Name,
+                    //    Unit = i.Unit
+                    //}
                 }).ToList()));
         }
     }

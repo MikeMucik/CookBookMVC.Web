@@ -19,6 +19,7 @@ namespace CookBookMVC.Infrastructure
 			services.AddTransient<IDifficultyRepository, DifficultyRepository>();
 			services.AddTransient<ICategoryRepository, CategoryRepository>();
 			services.AddTransient<ITimeRepository, TimeRepository>();
+			services.AddTransient<IIngredientRepository, IngredientRepository>();
 			return services;
 		}
 

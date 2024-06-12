@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CookBookMVC.Application.Mapping;
+using CookBookMVC.Application.ViewModels.Ingredient;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.ViewModels.Recipe
 {
-	public class RecipeDetailsVm : IMapFrom<CookBookMVC.Domain.Model.Recipe>
+    public class RecipeDetailsVm : IMapFrom<CookBookMVC.Domain.Model.Recipe>
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
