@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CookBookMVC.Application.ViewModels.Recipe
 {
-	public class ListDifficultyForListVm
+	public class ListIngredientNotQuantityVm
 	{
-		public List<DifficultyForListVm> Difficulties { get; set; }
+		public List<IngredientNotQuantityForListVm> Ingredients	 { get; set; }
 	}
 }

@@ -8,7 +8,7 @@ namespace CookBookMVC.Application.ViewModels.Recipe
 {
 	public class IngredientsForRecipeVm
 	{
-		List<IngredientForListVm> Ingredient {get; set;}
+		public List<IngredientForListVm> Ingredients {get; set;}
 		
 	}
 }

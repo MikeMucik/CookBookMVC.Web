@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CookBookMVC.Application.Interfaces;
-using CookBookMVC.Application.ViewModels.Recipe;
+using CookBookMVC.Application.ViewModels.Difficulty;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.Services
 {
-	public class DifficultyService : IDifficultyService
+    public class DifficultyService : IDifficultyService
 	{
 		private readonly IDifficultyRepository _difficultyRepo;
 		private readonly IMapper _mapper;

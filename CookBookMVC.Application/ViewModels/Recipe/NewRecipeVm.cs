@@ -15,7 +15,7 @@ namespace CookBookMVC.Application.ViewModels.Recipe
         public string Name { get; set; }
         public int CategoryId { get; set; } //
         public int AmountOfIngredients { get; set; }
-        public List<IngredientForListVm> Ingredients { get; set; } = new List<IngredientForListVm>(); //? to do zmiany by wybierać składnik z listy bądź dodać nowy
+        public List<IngredientForListVm> IngredientsWithQuantity { get; set; } = new List<IngredientForListVm>(); //? to do zmiany by wybierać składnik z listy bądź dodać nowy
         public int DifficultyId { get; set; }
         public int? TimeId { get; set; }
         public int? TimeAmount { get; set; }
@@ -29,18 +29,20 @@ namespace CookBookMVC.Application.ViewModels.Recipe
                 .ForMember(r => r.Time, opt => opt.MapFrom(t => 
                 t.TimeId.HasValue
                 ? null 
-                :new Time
+                :new CookBookMVC.Domain.Model.Time
                 {
                     Amount = (int)t.TimeAmount,
                     Unit = t.TimeUnit,
                 }))
                 .ForMember(r => r.CategoryId, opt => opt.MapFrom(w => w.CategoryId))
                 .ForMember(r => r.DifficultyId, opt => opt.MapFrom(e => e.DifficultyId))
-                .ForMember(r => r.RecipeIngredient, opt => opt.MapFrom(vm => vm.Ingredients.Select(i => new RecipeIngredient
+                .ForMember(r => r.RecipeIngredient, opt => opt.MapFrom(vm => vm.IngredientsWithQuantity.Select(i => new RecipeIngredient
                 {
                     IngredientId = i.Id,
                     Quantity = i.Quantity,
-                    Ingredient = new Ingredient
+                    Ingredient =              
+
+                    new Ingredient
                     {
                         Id = i.Id,
                         Name = i.Name,

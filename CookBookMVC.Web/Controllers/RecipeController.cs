@@ -54,7 +54,6 @@ namespace CookBookMVC.Web.Controllers
 		public IActionResult AddRecipe()
 		{
 			FillViewBags();
-
 			return View(new NewRecipeVm());
 		}
 
@@ -65,7 +64,6 @@ namespace CookBookMVC.Web.Controllers
 			{
 				if (model.TimeId.HasValue)
 				{
-					Console.WriteLine("TimeId ma wartość");
 					var selectedTime = _timeService.GetTimeById((int)model.TimeId);
 					if (selectedTime != null)
 					{
@@ -85,17 +83,19 @@ namespace CookBookMVC.Web.Controllers
 				}
 				else
 				{
-					ModelState.AddModelError("", "You must select existing time or provide new time");
+					ModelState.AddModelError("", "You must provide new time: Amount and Unit or both");
 					FillViewBags();
 					return View(model);
 				}
-				var id = _recipeService.AddRecipe(model);
+				//if (model.Ingredients.IngredientId) ;
+					var id = _recipeService.AddRecipe(model);
 				return RedirectToAction("Index");
+				
 			}
-			else { Console.WriteLine(Console.Error); }
+			else { Console.WriteLine(Console.Error); }	
 			
+			// test	
 			FillViewBags();
-
 			return View(model);
 		}
 
@@ -107,7 +107,6 @@ namespace CookBookMVC.Web.Controllers
 			{
 				return View("Error");
 			}
-
 			return View(recipeModel);
 		}
 		public void FillViewBags()

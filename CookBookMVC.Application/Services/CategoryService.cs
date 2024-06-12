@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CookBookMVC.Application.Interfaces;
-using CookBookMVC.Application.ViewModels.Recipe;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
 using AutoMapper.QueryableExtensions;
+using CookBookMVC.Application.ViewModels.Category;
 
 namespace CookBookMVC.Application.Services
 {
-	public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
 	{
 		private readonly ICategoryRepository _categoryRepo;
 		private readonly IMapper _mapper;

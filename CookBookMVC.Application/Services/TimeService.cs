@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CookBookMVC.Application.Interfaces;
-using CookBookMVC.Application.ViewModels.Recipe;
+using CookBookMVC.Application.ViewModels.Time;
 using CookBookMVC.Domain.Interface;
 using CookBookMVC.Domain.Model;
 
 namespace CookBookMVC.Application.Services
 {
-	public class TimeService : ITimeService
+    public class TimeService : ITimeService
 	{
 		private readonly ITimeRepository _timeRepo;
 		private readonly IMapper _mapper;
